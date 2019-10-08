@@ -1,0 +1,13 @@
+Questions about layouts
+
+Can you make pageTitle not wrap in an h1? eg <a href="<?php echo $site->url(); ?>" class="site-title"><?php echo $this->pageTitle($site->title()); ?></a>
+    Seems better to have it just be a link at the top and then wrap the item title in an h1?
+
+
+
+
+
+
+* Need to figure out how to use Metadata Browse on individual properties.
+* Change "rows" from grid-padding-x to grid-margin-x
+

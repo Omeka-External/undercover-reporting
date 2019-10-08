@@ -1,0 +1,151 @@
+<?php
+$escape = $this->plugin('escapeHtml');
+$translate = $this->plugin('translate');
+$this->htmlElement('body')->appendAttribute('class', 'item resource browse');
+
+$query = $this->params()->fromQuery();
+$itemSetShow = isset($itemSet);
+if ($itemSetShow):
+    $this->htmlElement('body')->appendAttribute('class', 'item-set');
+    $query['item_set_id'] = $itemSet->id();
+endif;
+$headingTerm = $this->siteSetting('browse_heading_property_term', 'dcterms:title');
+$bodyTerm = $this->siteSetting('browse_body_property_term', 'dcterms:description');
+$sortHeadings = [
+    [
+        'label' => $translate('Title'),
+        'value' => 'dcterms:title'
+    ],
+    [
+        'label' => $translate('Identifier'),
+        'value' => 'dcterms:identifier'
+    ],
+    [
+        'label' => $translate('Class'),
+        'value' => 'resource_class_label'
+    ],
+    [
+        'label' => $translate('Created'),
+        'value' => 'created'
+    ],
+];
+?>
+
+<?php if ($itemSetShow): ?>
+    <div class="small-12 cell">
+    <?php echo $this->pageTitle($itemSet->displayTitle(), 2); ?>
+    </div>
+    <div class="medium-4 cell">
+        <?php echo $this->thumbnail($itemSet, 'medium') ?>
+        <?php 
+        $description = $itemSet->value('dcterms:description');
+        $creators = $itemSet->value('dcterms:creator', ['all' => true]);
+        $creators = array_map(function ($value){return $value->asHtml();}, $creators);
+        $creatorList = '<p class="metadata">' . implode('</p><p class="metadata">', $creators) . '</p>';
+        $links = $itemSet->value('dcterms:relation', ['all' => true]);
+        $links = array_map(function($value){return $value->asHtml();}, $links);
+        $linkList = '<p class="metadata">' . implode('</p><p class="metadata">', $links) . '</p>';
+        $subjects = $itemSet->value('dcterms:subject', ['all' => true]);
+        $subjects = array_map(function ($value){return $value->asHtml();}, $subjects);
+        $tagsList = '<p class="metadata">' . implode('</p><p class="metadata">', $subjects) . '</p>';
+        $abstract = $itemSet->value('dcterms:abstract');
+        ?>
+        <?php if($description): ?>
+            <div class="metadata-group">
+            <h4>Description</h4>
+            <p><?php echo $description; ?></p>
+            </div>
+        <?php endif; ?>
+        <?php if($creatorList): ?>
+            <div class="metadata-group">
+            <h4>Authors</h4>
+            <?php echo $creatorList; ?>
+            </div>
+        <?php endif; ?>
+        <?php if($linkList): ?>
+            <div class="metadata-group">
+            <h4>Links and Resources</h4>
+            <?php echo $linkList; ?>
+            </div>
+        <?php endif; ?>
+        <?php if($tagsList): ?>
+            <div class="metadata-group">
+            <h4>Subjects</h4>
+            <?php echo $tagsList; ?>
+            </div>
+        <?php endif; ?>
+        <?php if($abstract): ?>
+            <div class="metadata-group">
+            <h4>Effects and Outcomes</h4>
+            <p><?php echo $abstract; ?></p>
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="medium-8 cell">
+        <?php foreach ($items as $item):
+        $heading = $item->value($headingTerm, ['default' => $translate('[Untitled]')]);
+        $subHeading = $item->value('dcterms:alternative');
+        $body = $item->value('dcterms:abstract');
+        $publication = $item->value('dcterms:publisher');
+        $date = $item->value('dcterms:date');
+    ?>
+        <div class="medium-12 cell article-entry">
+            <h3><?php echo $item->link($heading); ?></h3>
+            <?php if($subHeading): ?>
+                <p class="subhead"><?php echo $subHeading; ?></p>
+            <?php endif; ?>
+            <?php if ($date): ?>
+                <p class="italic"><?php echo $date; ?></p>
+            <?php endif; ?>
+            <?php if ($body): ?>
+                <p><?php echo $body; ?><p>
+            <?php endif; ?>
+            
+        </div>
+    <?php endforeach; ?>
+
+    </div>
+
+
+<?php else: ?>
+    <div class="medium-6 cell">
+        <?php echo $this->pageTitle($translate('Browse Articles'), 2); ?>
+    </div>
+    <div class="medium-3 medium-offset-3 cell">
+        <?php echo $this->pagination(); ?>
+    </div>
+
+
+<?php $this->trigger('view.browse.before'); ?>
+<div class="medium-3 cell">
+    <h4>Filter Results</h4>
+    <!-- <?php echo $this->ValuesForProperties(); ?> -->
+</div>
+<div class="medium-9 cell">
+    <div class="grid-x grid-padding-x">
+    <?php
+    foreach ($items as $item):
+        $heading = $item->value($headingTerm, ['default' => $translate('[Untitled]')]);
+        $body = $item->value('dcterms:abstract');
+        $publication = $item->value('dcterms:publisher');
+        $date = $item->value('dcterms:date');
+    ?>
+        <div class="medium-12 cell article-entry">
+            <h3><?php echo $item->link($heading); ?></h3>
+            <?php if ($body): ?>
+            <p><?php echo $body; ?><p>
+            <?php endif; ?>
+            <?php if ($publication): ?>
+            <p><span class="italic"><?php echo $publication; ?></span>&nbsp;&nbsp;<?php echo $date; ?></p>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+    </div>
+    <?php echo ($itemSetShow) ? '</div>' : ''; ?>
+    <?php $this->trigger('view.browse.after'); ?>
+    <div class="medium-3 medium-offset-9 cell">
+        <?php echo $this->pagination(); ?>
+    </div>
+
+<?php endif; ?>
+</div>

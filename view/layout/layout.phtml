@@ -1,0 +1,77 @@
+<?php
+$escape = $this->plugin('escapeHtml');
+$this->htmlElement('html')->setAttribute('lang', $this->lang());
+$this->headMeta()->setCharset('utf-8');
+$this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1');
+$this->headTitle($this->setting('installation_title', 'Omeka S'))->setSeparator(' · ');
+$this->headLink()->prependStylesheet('//fonts.googleapis.com/css?family=Montserrat|Open+Sans');
+$this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/foundation.css'));
+$this->headLink()->appendStylesheet($this->assetUrl('css/style.css'));
+$this->headScript()->prependFile($this->assetUrl('js/app.js'));
+$this->headScript()->prependFile($this->assetUrl('js/what-input.js'));
+$this->headScript()->prependFile($this->assetUrl('js/foundation.js'));
+$this->headScript()->prependFile($this->assetUrl('js/global.js', 'Omeka'));
+$this->headScript()->prependFile($this->assetUrl('vendor/jquery/jquery.min.js', 'Omeka'));
+$this->trigger('view.layout');
+$userBar = $this->userBar();
+?>
+<?php echo $this->doctype(); ?>
+<?php echo $this->htmlElement('html'); ?>
+    <head>
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headTitle(); ?>
+        <?php echo $this->headLink(); ?>
+        <?php echo $this->headStyle(); ?>
+        <?php echo $this->headScript(); ?>
+    </head>
+
+    <?php echo $this->htmlElement('body'); ?>
+        <?php echo $userBar; ?>
+            <header>
+                <div class="grid-container">
+                    <div class="grid-x grid-padding-x">
+                        <div class="medium-6 cell">
+                            <?php if ($this->themeSetting('logo')): ?>
+                            <a href="<?php echo $site->url(); ?>" class="site-title"><img src="<?php echo $this->themeSettingAssetUrl('logo'); ?>" title="Logo"></a>
+                            <?php else: ?>
+                            <a href="<?php echo $site->url(); ?>" class="site-title"><?php echo $this->pageTitle($site->title()); ?></a>
+                            <?php endif; ?>
+                        </div>
+
+                            <div id="search-container" class="medium-3 medium-offset-3 cell">
+                                <?php $searchValue = $this->escapeHtml($this->params()->fromQuery('search', '')); ?>
+                                <form action="<?php echo $this->escapeHtml($this->url('site/resource', ['controller' => 'item','action' => 'browse'], true)); ?>" id="search-form">
+                                    <input type="text" name="search" value="<?php echo $searchValue; ?>" placeholder="<?php echo $this->translate('Search'); ?>">
+                                </form>
+                            </div>
+                            <div class="medium-12 column">
+                                <nav>
+                                <?php
+                                echo $site->publicNav()->menu()->renderMenu(null, ['ulClass' => 'menu',
+                                    'maxDepth' => $this->themeSetting('nav_depth') - 1
+                                ]);
+                                ?>
+                                </nav>
+                            </div>
+                    </div>
+                </div>
+            </header>
+
+            <div id="wrap">
+                <div id="content" role="main" class="grid-container">
+                    <div class="grid-x grid-padding-x">
+                        <?php echo $this->content; ?>
+                    </div>
+                    <footer class="footer grid-x grid-padding-x">
+                        <div class="cell medium-4">
+                            <a href="https://www.nyu.edu/"><img src="<?php echo $this->assetUrl('img/nyu_long_black.png'); ?>" alt="NYU logo"></a>
+                        </div>
+                        <?php if ($footerContent = $this->themeSetting('footer')): ?>
+                        <?php echo $footerContent; ?>
+                        <?php endif; ?>
+                    </footer>
+                </div>    
+            </div>
+    </body>
+</html>

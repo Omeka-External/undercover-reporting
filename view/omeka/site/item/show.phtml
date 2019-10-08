@@ -1,0 +1,65 @@
+<?php
+$translate = $this->plugin('translate');
+$escape = $this->plugin('escapeHtml');
+$this->htmlElement('body')->appendAttribute('class', 'item resource show');
+$embedMedia = $this->siteSetting('item_media_embed', false);
+$itemMedia = $item->media();
+?>
+
+<div class="cell">
+    <?php echo $this->pageTitle($item->displayTitle(), 1); ?>
+</div>
+    <div class="medium-4 cell">
+        <?php 
+        $creators = $item->value('dcterms:creator', ['all' => true]);
+        $creatorsList = implode(', ', $creators);
+        ?>
+        <?php $date = $item->value('dcterms:date'); ?>
+        <?php $publication = $item->value('dcterms:publisher'); ?>
+        <?php $pages = $item->value('bibo:pages'); ?>
+        <p><span class="bold">Byline: </span><?php if($creatorsList) echo $creatorsList .';&nbsp;'; ?><?php if($date) echo $date .';&nbsp;'; ?><?php if($publication) echo $publication .';&nbsp;'; ?><?php if($pages) echo 'pages&nbsp' . $pages; ?></p>
+        <?php $itemSets = $item->itemSets(); ?>
+        <p><span class="bold">Cluster: </span>
+            <?php foreach($itemSets as $itemSet): ?>
+                <a href="<?php echo $escape($itemSet->url()); ?>"><?php echo $itemSet->displayTitle(); ?></a>
+            <?php endforeach; ?>
+        </p>
+        <?php 
+        $subjects = $item->value('dcterms:subject', ['all' => true]);
+        $subjects = array_map(function ($value){return $value->asHtml();}, $subjects);
+        $tagsList = implode(', ', $subjects);
+        ?>
+        <p><?php echo $tagsList; ?></p>
+
+        <?php foreach ($itemMedia as $media): ?>
+            <?php if (!$media->hasThumbnails()): ?>
+                <?php $articleURL = $media->originalUrl('Full Article'); ?>
+                <p><a href="<?php echo $articleURL; ?>">Full Article</a></p>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <?php $relations = $item->value('dcterms:relation', ['all' => true]); ?>
+            <?php foreach ($relations as $relation): ?>
+                <p><a href="<?php echo $relation->uri(); ?>"><?php echo $relation; ?></a></p>
+            <?php endforeach; ?>
+    </div>
+    <div class="medium-8 cell">
+        <p class="pullquote"><?php echo $item->value('dcterms:abstract'); ?></p>
+    </div>
+
+    <div class="medium-12 cell">
+        <p><?php echo $item->value('dcterms:description'); ?></p>
+    </div>
+    <div class="medium-12 cell">
+        <h4>Additional Media</h4>
+    </div>
+    <?php foreach ($itemMedia as $media): ?>
+        <?php if ($media->hasThumbnails()): ?>
+            <div class="medium-3 cell">
+                <?php echo $media->render(); ?>
+            </div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+
+<?php $this->trigger('view.show.after'); ?>

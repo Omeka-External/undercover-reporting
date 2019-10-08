@@ -1,0 +1,224 @@
+$red:#B50000;
+$darker-red:#940000;
+$lightest-gray:#eceaea;
+$light-gray:#999;
+body {background:#fff}
+
+.grid-x {
+    margin-bottom: 1rem;
+}
+
+header {
+    background:linear-gradient(180deg, $lightest-gray, #fff);
+}
+
+#search-container {
+  margin-top:10px;
+}
+
+.pagination a, .pagination button {
+    display:inline-block;
+    padding: 0.85em 1em;
+}
+
+.pagination form {
+    display: inline-block;
+}
+
+.pagination input {
+    display: inline-block;
+    width:2rem;
+}
+
+.pagination span {
+    display:inline-block;
+}
+
+.pagination span.row-count {
+    display:block;
+}
+.article-list {
+    border-right: 1px solid $light-gray;
+}
+
+.article-entry {
+    border-bottom:1px solid $light-gray;
+    margin-bottom:.7rem;
+}
+
+.article-list .cell {
+    padding:1rem 3rem;
+    border-bottom: 1px solid $light-gray;
+    text-align: center;
+}
+
+.cluster-list-item {
+    padding-top:2rem;
+    padding-bottom:3rem;
+    border-bottom:1px solid $light-gray;
+}
+
+.bold {
+    font-weight:bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.subhead {
+    font-style:italic;
+    font-size:1.25rem;
+    color:$light-gray;
+    margin-top:-1rem;
+    margin-bottom:0;
+}
+.pullquote {
+    font:italic 1.5rem serif;
+    // margin:3rem 15%;
+    padding-left:1rem;
+    border-left:5px solid #1779ba;
+}
+
+.footer {
+    margin-top:2rem;
+    border-top:1px solid $light-gray;
+    padding-top:1rem;
+}
+
+.last, .cell .last {
+    border:none;
+}
+
+li, h1, h2, h3, h4, h5 {
+        font-family: 'Montserrat', sans-serif;
+}
+p, div > a  {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    font-size:2.75rem;
+}
+
+#content h1 {
+    font-size:2.5rem;
+    color:$red;
+}
+
+h2, h3, h4, h5 {
+    color:$red;
+}
+
+h4 {
+    margin-bottom:0;
+}
+
+#headings {
+    display:block;
+}
+
+a {
+    color:$red;
+}
+
+a:hover {
+    color:$darker-red;
+}
+
+#content a:hover {
+    text-decoration: underline;
+}
+
+.menu {
+   border-top:1px solid $red;
+    margin-bottom: 1rem;
+    margin-top:-.5rem;
+
+}
+
+.menu .active > a {
+    background: inherit;
+    color: $red;
+    border-right:1px solid $red;
+    border-left:1px solid $red;
+    border-bottom:1px solid $red;
+}
+
+.pullquote {
+    border-left:10px solid $red;
+    background-color: $lightest-gray;
+    font-size:1.5rem;
+    color:#4E4C4C;
+    padding: 2rem;
+    float:right;
+}
+
+
+
+.button {
+    background:$red;
+    color:#fff;
+    margin-bottom:.25rem;
+}
+
+.button:hover {
+    background:#4E4C4C;
+}
+
+.border {
+    border-left: 2px solid #4E4C4C;
+    padding-left:1rem;
+
+    a {
+        display:block;
+    }
+}
+header {
+    background:linear-gradient(180deg, $lightest-gray, #fff);
+}
+
+#headings {
+    display:block;
+}
+
+
+p > a:hover {
+    text-decoration: underline;
+}
+
+
+.pullquote {
+    border-left:10px solid #990000;
+    background-color: #eceaea;
+    font-size:1.5rem;
+    color:#4E4C4C;
+    padding: 2rem;
+    float:right;
+}
+
+.button {
+    background:#990000;
+    color:#fff;
+}
+
+.button:hover {
+    background:#4E4C4C;
+}
+
+.border {
+    border-left: 2px solid #4E4C4C;
+    padding-left:1rem;
+
+    a {
+        display:block;
+    }
+}
+
+p.metadata {
+    margin-bottom: .25rem; 
+}
+
+.metadata-group {
+    margin-bottom:1rem;
+}

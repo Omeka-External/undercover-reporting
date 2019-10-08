@@ -1,0 +1,38 @@
+<?php
+$escape = $this->plugin('escapeHtml');
+$translate = $this->plugin('translate');
+
+$this->htmlElement('body')->appendAttribute('class', 'item-set resource browse');
+?>
+
+<div class="medium-6 cell">
+    <?php echo $this->pageTitle($translate('Browse Reports'), 2); ?>
+</div>
+
+<?php echo $this->searchFilters(); ?>
+
+<div class="medium-3 cell medium-offset-3 browse-controls">
+    <?php echo $this->pagination(); ?>
+</div>
+
+<?php $this->trigger('view.browse.before'); ?>
+<div class="grid-container">
+
+    <?php foreach ($itemSets as $itemSet): ?>
+    <div class="grid-x grid-padding-x cluster-list-item">
+        <div class="medium-3 cell">
+            <?php echo $itemSet->linkRaw($this->thumbnail($itemSet, 'medium')); ?>
+        </div>
+        <div class="medium-9 cell">
+            <h4><?php echo $itemSet->link($itemSet->displayTitle()); ?></h4>
+            <?php if ($description = $itemSet->displayDescription()): ?>
+            <div class="description"><?php echo $description; ?></div>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
+<?php $this->trigger('view.browse.after'); ?>
+<div class="medium-3 medium-offset-9 cell">
+    <?php echo $this->pagination(); ?>
+</div>
