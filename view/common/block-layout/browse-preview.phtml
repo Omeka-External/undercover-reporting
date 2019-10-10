@@ -1,0 +1,26 @@
+<?php
+$translate = $this->plugin('translate');
+?>
+<?php if ($this->heading): ?>
+<h2><?php echo $this->heading; ?></h2>
+<?php endif; ?>
+
+<?php 
+$recentItems = $this->resources;
+$recentItemsChunks = array_chunk($recentItems, 4);
+?>
+<div class="grid-x grid-padding-x">
+<?php foreach($recentItemsChunks as $recentItemsChunk): ?>
+    <div class="medium-4 cell article-list">
+        <?php
+            $headingTerm = $this->siteSetting('browse_heading_property_term', 'dcterms:title');
+            foreach ($recentItemsChunk as $resource):
+                $heading = $resource->value($headingTerm, ['default' => $translate('[Untitled]')]);
+            ?>
+            <div class="cell">
+                <h4><?php echo $resource->link($heading); ?></h4>
+            </div>
+            <?php endforeach; ?>
+    </div>
+<?php endforeach; ?>
+</div>
