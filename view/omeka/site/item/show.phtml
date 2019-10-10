@@ -39,9 +39,11 @@ $itemMedia = $item->media();
         <?php endforeach; ?>
 
         <?php $relations = $item->value('dcterms:relation', ['all' => true]); ?>
+        <?php if ($relations): ?>
             <?php foreach ($relations as $relation): ?>
                 <p><a href="<?php echo $relation->uri(); ?>"><?php echo $relation; ?></a></p>
             <?php endforeach; ?>
+        <?php endif; ?>
     </div>
     <div class="medium-8 cell">
         <p class="pullquote"><?php echo $item->value('dcterms:abstract'); ?></p>
@@ -50,13 +52,15 @@ $itemMedia = $item->media();
     <div class="medium-12 cell">
         <p><?php echo $item->value('dcterms:description'); ?></p>
     </div>
-    <div class="medium-12 cell">
-        <h4>Additional Media</h4>
-    </div>
+    
+    
     <?php foreach ($itemMedia as $media): ?>
         <?php if ($media->hasThumbnails()): ?>
+            <div class="medium-12 cell">
+            <h4>Additional Media</h4>
             <div class="medium-3 cell">
                 <?php echo $media->render(); ?>
+            </div>
             </div>
         <?php endif; ?>
     <?php endforeach; ?>
