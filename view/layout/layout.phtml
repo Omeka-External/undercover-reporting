@@ -67,9 +67,12 @@ $userBar = $this->userBar();
                         <div class="cell medium-4">
                             <a href="https://www.nyu.edu/"><img src="<?php echo $this->assetUrl('img/nyu_long_black.png'); ?>" alt="NYU logo"></a>
                         </div>
-                        <?php if ($footerContent = $this->themeSetting('footer')): ?>
-                        <?php echo $footerContent; ?>
-                        <?php endif; ?>
+                        <div class="cell medium-8">
+                            <?php if ($footerContent = $this->themeSetting('footer')): ?>
+                            <p><?php echo $footerContent; ?></p>
+                            <?php endif; ?>
+                        </div>
+                        
                     </footer>
                 </div>    
             </div>
