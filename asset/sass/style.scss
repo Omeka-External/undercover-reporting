@@ -4,6 +4,23 @@ $lightest-gray:#eceaea;
 $light-gray:#999;
 body {background:#fff}
 
+a#skipnav 
+{
+position:absolute;
+left:-10000px;
+top:auto;
+width:1px;
+height:1px;
+overflow:hidden;
+}
+ 
+a#skipnav:focus
+{
+position:static;
+width:auto;
+height:auto;
+} 
+
 .grid-x {
     margin-bottom: 1rem;
 }
@@ -19,6 +36,7 @@ header {
 .pagination a, .pagination button {
     display:inline-block;
     padding: 0.85em 1em;
+    color:#fff;
 }
 
 .pagination form {
@@ -66,10 +84,10 @@ header {
     font-style: italic;
 }
 
-.subhead {
+h4.subhead {
     font-style:italic;
     font-size:1.25rem;
-    color:$light-gray;
+    color:#777;
     margin-top:-1rem;
     margin-bottom:0;
 }
@@ -122,11 +140,11 @@ a {
     color:$red;
 }
 
-a:hover {
+a:hover, a:focus {
     color:$darker-red;
 }
 
-#content a:hover {
+#content a:hover, #content a:focus {
     text-decoration: underline;
 }
 
@@ -160,7 +178,7 @@ a:hover {
     margin-bottom:.25rem;
 }
 
-.button:hover {
+.button:hover, .button:focus, .pagination a:hover, .pagination button:hover {
     background:#4E4C4C;
 }
 
@@ -181,7 +199,7 @@ header {
 }
 
 
-p > a:hover {
+p > a:hover, p > a:focus {
     text-decoration: underline;
 }
 

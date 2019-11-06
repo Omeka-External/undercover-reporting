@@ -49,9 +49,12 @@ $itemMedia = $item->media();
         <p class="pullquote"><?php echo $item->value('dcterms:abstract'); ?></p>
     </div>
 
+    <?php if($item->value('dcterms:rights')): ?>
     <div class="medium-12 cell">
         <p><?php echo $item->value('dcterms:description'); ?></p>
+        <p><span class="rights">Rights:</span> <?php echo $item->value('dcterms:rights'); ?></p>
     </div>
+    <?php endif; ?>
     
     
     <?php foreach ($itemMedia as $media): ?>
