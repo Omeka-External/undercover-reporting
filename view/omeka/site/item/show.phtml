@@ -26,10 +26,14 @@ $itemMedia = $item->media();
         </p>
         <?php 
         $subjects = $item->value('dcterms:subject', ['all' => true]);
+        if($subjects):
         $subjects = array_map(function ($value){return $value->asHtml();}, $subjects);
         $tagsList = implode(', ', $subjects);
+        endif;
         ?>
-        <p><?php echo $tagsList; ?></p>
+        <?php if($tagsList): ?>
+            <p><?php echo $tagsList; ?></p>
+        <?php endif; ?>
 
         <?php foreach ($itemMedia as $media): ?>
             <?php if (!$media->hasThumbnails()): ?>
