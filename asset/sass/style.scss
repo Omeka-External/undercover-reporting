@@ -55,6 +55,45 @@ header {
 .pagination span.row-count {
     display:block;
 }
+
+.image-hover-wrapper {
+  position: relative;
+
+  a {
+    display: inline-block;
+    letter-spacing: normal;
+    line-height: initial;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-size:2.75rem;
+    font-weight: bold;
+    color:#fff;
+    }
+
+    a:hover {
+        color:#fff;
+    }
+
+    img {
+      float: left;
+      overflow: hidden;
+      width: 100%;
+    }
+
+  .image-hover-wrapper-banner {
+    background-color: rgba(153, 153, 153,0.8);
+    color: #fff;
+    left: 0;
+    padding: 1.5rem;
+    position: absolute;
+    top: 33%;
+    width: 75%;
+    margin-left:12.5%;
+    z-index: 10;
+  }
+}
+
 .article-list {
     border-right: 1px solid $light-gray;
 }
@@ -116,7 +155,8 @@ p, div > a  {
 }
 
 h1 {
-    font-size:2.75rem;
+    font-size:3rem;
+    margin-top:10px;
 }
 
 #content h1 {
@@ -162,6 +202,46 @@ a:hover, a:focus {
     border-left:1px solid $red;
     border-bottom:1px solid $red;
 }
+
+/*Advanced Search */
+#advanced-search .label {
+    background:#fff;
+    color:#000;
+    font-size:1.25rem;
+}
+
+.remove-value {
+    text-indent: -9999px;
+    position: relative;
+    width: 45px;
+    margin-left: 7.5px;
+    height:39px;
+}
+
+.remove-value::before {
+    text-indent: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    line-height: 39px;
+}
+
+#advanced-search #property-queries .joiner {
+    width:100%;
+}
+
+#advanced-search .field {
+    padding:2rem 0;
+    border-bottom:1px solid $red;
+}
+
+#advanced-search #page-actions {
+    margin-top:1rem;
+}
+
+
 
 .pullquote {
     border-left:10px solid $red;

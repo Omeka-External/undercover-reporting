@@ -1,5 +1,5 @@
 <?php
-$escape = $this->plugin('escapeHtml');
+$escapeHtmlcape = $this->plugin('escapeHtml');
 $translate = $this->plugin('translate');
 
 $this->htmlElement('body')->appendAttribute('class', 'item-set resource browse');
@@ -21,6 +21,7 @@ $this->htmlElement('body')->appendAttribute('class', 'item-set resource browse')
     <?php foreach ($itemSets as $itemSet): ?>
     <div class="grid-x grid-padding-x cluster-list-item">
         <div class="medium-3 cell">
+            <!-- if dates get fixed, get url separately, tack ?sort_by=dcterms:date&sort_order=asc on, wrap around thumbnail -->
             <?php echo $itemSet->linkRaw($this->thumbnail($itemSet, 'medium')); ?>
         </div>
         <div class="medium-9 cell">

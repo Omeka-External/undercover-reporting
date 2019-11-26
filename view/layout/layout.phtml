@@ -41,6 +41,7 @@ $userBar = $this->userBar();
                         </div>
 
                             <div id="search-container" class="medium-3 medium-offset-3 cell">
+                                <a href="<?php echo $site->url(); ?>/item/search">Advanced Search</a>
                                 <?php $searchValue = $this->escapeHtml($this->params()->fromQuery('search', '')); ?>
                                 <form action="<?php echo $this->escapeHtml($this->url('site/resource', ['controller' => 'item','action' => 'browse'], true)); ?>" id="search-form" role="search">
                                     <input type="text" name="search" value="<?php echo $searchValue; ?>" placeholder="<?php echo $this->translate('Search'); ?>" aria-label="search">
@@ -65,10 +66,10 @@ $userBar = $this->userBar();
                         <?php echo $this->content; ?>
                     </div>
                     <footer class="footer grid-x grid-padding-x">
-                        <div class="cell medium-4">
-                            <a href="https://www.nyu.edu/"><img src="<?php echo $this->assetUrl('img/nyu_long_black.png'); ?>" alt="NYU logo"></a>
-                        </div>
-                        <div class="cell medium-8">
+                        <!-- <div class="cell medium-4">
+                            <a href="https://www.nyu.edu/"><img src="<?php// echo $this->assetUrl('img/nyu_long_black.png'); ?>" alt="NYU logo"></a>
+                        </div> -->
+                        <div class="cell medium-12">
                             <?php if ($footerContent = $this->themeSetting('footer')): ?>
                             <p><?php echo $footerContent; ?></p>
                             <?php endif; ?>

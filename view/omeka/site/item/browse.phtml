@@ -41,13 +41,13 @@ $sortHeadings = [
         $description = $itemSet->value('dcterms:description');
         $creators = $itemSet->value('dcterms:creator', ['all' => true]);
         $creators = array_map(function ($value){return $value->asHtml();}, $creators);
-        $creatorList = '<p class="metadata">' . implode('</p><p class="metadata">', $creators) . '</p>';
+        $creatorList = '<li class="metadata">' . implode('</li><li class="metadata">', $creators) . '</li>';
         $links = $itemSet->value('dcterms:relation', ['all' => true]);
         $links = array_map(function($value){return $value->asHtml();}, $links);
-        $linkList = '<p class="metadata">' . implode('</p><p class="metadata">', $links) . '</p>';
+        $linkList = '<li class="metadata">' . implode('</li><li class="metadata">', $links) . '</li>';
         $subjects = $itemSet->value('dcterms:subject', ['all' => true]);
         $subjects = array_map(function ($value){return $value->asHtml();}, $subjects);
-        $tagsList = '<p class="metadata">' . implode('</p><p class="metadata">', $subjects) . '</p>';
+        $tagsList = '<li class="metadata">' . implode('</li><li class="metadata">', $subjects) . '</li>';
         $abstract = $itemSet->value('dcterms:abstract');
         ?>
         <?php if($description): ?>
@@ -59,19 +59,25 @@ $sortHeadings = [
         <?php if($creatorList): ?>
             <div class="metadata-group">
             <h4>Authors</h4>
+            <ul>
             <?php echo $creatorList; ?>
+            </ul>
             </div>
         <?php endif; ?>
         <?php if($linkList): ?>
             <div class="metadata-group">
             <h4>Links and Resources</h4>
+            <ul>
             <?php echo $linkList; ?>
+            </ul>
             </div>
         <?php endif; ?>
         <?php if($tagsList): ?>
             <div class="metadata-group">
             <h4>Subjects</h4>
+            <ul>
             <?php echo $tagsList; ?>
+            </ul>
             </div>
         <?php endif; ?>
         <?php if($abstract): ?>

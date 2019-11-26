@@ -7,23 +7,30 @@ $itemMedia = $item->media();
 ?>
 
 <div class="cell">
-    <?php echo $this->pageTitle($item->displayTitle(), 1); ?>
+    <?php echo $this->pageTitle($item->displayTitle(), 2); ?>
 </div>
     <div class="medium-4 cell">
         <?php 
         $creators = $item->value('dcterms:creator', ['all' => true]);
-        $creatorsList = implode(', ', $creators);
+        if ($creators):
+            $creatorsList = implode(', ', $creators);
+        else: $creatorsList = null;
+        endif;
         ?>
         <?php $date = $item->value('dcterms:date'); ?>
         <?php $publication = $item->value('dcterms:publisher'); ?>
         <?php $pages = $item->value('bibo:pages'); ?>
+        <?php if($creatorsList): ?>
         <p><span class="bold">Byline: </span><?php if($creatorsList) echo $creatorsList .';&nbsp;'; ?><?php if($date) echo $date .';&nbsp;'; ?><?php if($publication) echo $publication .';&nbsp;'; ?><?php if($pages) echo 'pages&nbsp' . $pages; ?></p>
+        <?php endif; ?>
         <?php $itemSets = $item->itemSets(); ?>
+        <?php if($itemSets): ?>
         <p><span class="bold">Cluster: </span>
             <?php foreach($itemSets as $itemSet): ?>
                 <a href="<?php echo $escape($itemSet->url()); ?>"><?php echo $itemSet->displayTitle(); ?></a>
             <?php endforeach; ?>
         </p>
+        <?php endif; ?>
         <?php 
         $subjects = $item->value('dcterms:subject', ['all' => true]);
         if($subjects):
@@ -32,7 +39,7 @@ $itemMedia = $item->media();
         endif;
         ?>
         <?php if($tagsList): ?>
-            <p><?php echo $tagsList; ?></p>
+            <p><span class="bold">Tags: </span><?php echo $tagsList; ?></p>
         <?php endif; ?>
 
         <?php foreach ($itemMedia as $media): ?>
@@ -44,9 +51,12 @@ $itemMedia = $item->media();
 
         <?php $relations = $item->value('dcterms:relation', ['all' => true]); ?>
         <?php if ($relations): ?>
+            <span class="bold">Article Links</span>
+            <ul>
             <?php foreach ($relations as $relation): ?>
-                <p><a href="<?php echo $relation->uri(); ?>"><?php echo $relation; ?></a></p>
+                <li><a href="<?php echo $relation->uri(); ?>"><?php echo $relation; ?></a></li>
             <?php endforeach; ?>
+            </ul>
         <?php endif; ?>
     </div>
     <div class="medium-8 cell">
@@ -56,7 +66,7 @@ $itemMedia = $item->media();
     <?php if($item->value('dcterms:rights')): ?>
     <div class="medium-12 cell">
         <p><?php echo $item->value('dcterms:description'); ?></p>
-        <p><span class="rights">Rights:</span> <?php echo $item->value('dcterms:rights'); ?></p>
+        <p><span class="bold">Rights:</span> <?php echo $item->value('dcterms:rights'); ?></p>
     </div>
     <?php endif; ?>
     
