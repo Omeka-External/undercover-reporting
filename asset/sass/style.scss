@@ -98,6 +98,10 @@ header {
     border-right: 1px solid $light-gray;
 }
 
+.article-list:last-child {
+    border:none;
+}
+
 .article-entry {
     border-bottom:1px solid $light-gray;
     margin-bottom:.7rem;
@@ -138,6 +142,7 @@ h4.subhead {
 }
 
 .footer {
+    width:100%;
     margin-top:2rem;
     border-top:1px solid $light-gray;
     padding-top:1rem;
@@ -317,4 +322,10 @@ p.metadata {
 
 .metadata-group {
     margin-bottom:1rem;
+}
+
+@media screen and (min-width:900px){
+    #About .blocks {
+        width:75%;
+    }
 }

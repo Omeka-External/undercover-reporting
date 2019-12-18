@@ -1,5 +1,7 @@
 <?php
+$id = $page->title();
 $this->htmlElement('body')->appendAttribute('class', 'page');
+$this->htmlElement('body')->appendAttribute('id', $id);
 $this->pageTitle($page->title(), 2);
 $showPagePagination = $this->siteSetting('show_page_pagination', true);
 ?>
