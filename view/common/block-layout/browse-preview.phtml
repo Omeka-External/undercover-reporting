@@ -9,6 +9,7 @@ $translate = $this->plugin('translate');
 $recentItems = $this->resources;
 $recentItemsChunks = array_chunk($recentItems, 4);
 ?>
+<div class="grid-x grid-padding-x">
 <?php foreach($recentItemsChunks as $recentItemsChunk): ?>
     <div class="medium-4 cell article-list">
         <?php
@@ -22,3 +23,4 @@ $recentItemsChunks = array_chunk($recentItems, 4);
             <?php endforeach; ?>
     </div>
 <?php endforeach; ?>
+</div>
