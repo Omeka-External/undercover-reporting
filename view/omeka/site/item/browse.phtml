@@ -37,17 +37,29 @@ $sortHeadings = [
     </div>
     <div class="medium-4 cell">
         <?php echo $this->thumbnail($itemSet, 'medium') ?>
-        <?php 
+        <?php
+        $tagsList = '';
+        $creatorList = '';
+        $linkList = '';
+        $setList = '';
         $description = $itemSet->value('dcterms:description');
         $creators = $itemSet->value('dcterms:creator', ['all' => true]);
-        $creators = array_map(function ($value){return $value->asHtml();}, $creators);
-        $creatorList = '<li class="metadata">' . implode('</li><li class="metadata">', $creators) . '</li>';
+        if ($creators){
+            $creators = array_map(function ($value){return $value->asHtml();}, $creators);
+            $creatorList = '<li class="metadata">' . implode('</li><li class="metadata">', $creators) . '</li>';
+        }
         $links = $itemSet->value('dcterms:relation', ['all' => true]);
-        $links = array_map(function($value){return $value->asHtml();}, $links);
-        $linkList = '<li class="metadata">' . implode('</li><li class="metadata">', $links) . '</li>';
+        if ($links){
+            $links = array_map(function($value){return $value->asHtml();}, $links);
+            $linkList = '<li class="metadata">' . implode('</li><li class="metadata">', $links) . '</li>';
+        }
         $subjects = $itemSet->value('dcterms:subject', ['all' => true]);
-        $subjects = array_map(function ($value){return $value->asHtml();}, $subjects);
-        $tagsList = '<li class="metadata">' . implode('</li><li class="metadata">', $subjects) . '</li>';
+        if ($subjects){
+
+            $subjects = array_map(function ($value){return $value->asHtml();}, $subjects);
+            $tagsList = '<li class="metadata">' . implode('</li><li class="metadata">', $subjects) . '</li>';
+        }
+        $sets = $itemSet->value('dcterms:hasPart', ['all' => true]);
         $abstract = $itemSet->value('dcterms:abstract');
         ?>
         <?php if($description): ?>
@@ -88,6 +100,15 @@ $sortHeadings = [
         <?php endif; ?>
     </div>
     <div class="medium-8 cell">
+        <?php foreach ($sets as $set):
+            $setTitle = $set->valueResource()->displayTitle(); 
+            $description = $set->valueResource()->displayDescription();
+        ?>
+            <div class="medium-12 cell article-entry">
+                <h3><?php echo $set->valueResource()->link($setTitle); ?></h3>
+                <p><?php echo $description; ?></p>
+            </div>
+        <?php endforeach; ?>
         <?php foreach ($items as $item):
         $heading = $item->value($headingTerm, ['default' => $translate('[Untitled]')]);
         $subHeading = $item->value('dcterms:alternative');
