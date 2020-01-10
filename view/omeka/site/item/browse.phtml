@@ -178,9 +178,8 @@ $sortHeadings = [
     </div>
     <?php echo ($itemSetShow) ? '</div>' : ''; ?>
     <?php $this->trigger('view.browse.after'); ?>
-    <div class="medium-3 medium-offset-9 cell">
-        <?php echo $this->pagination(); ?>
-    </div>
-
-<?php endif; ?>
 </div>
+<div class="medium-offset-9 medium-3  cell">
+    <?php echo $this->pagination(); ?>
+</div>
+<?php endif; ?>
