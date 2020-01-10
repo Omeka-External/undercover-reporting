@@ -106,15 +106,17 @@ $sortHeadings = [
         <?php endif; ?>
     </div>
     <div class="medium-8 cell">
-        <?php foreach ($sets as $set):
-            $setTitle = $set->valueResource()->displayTitle(); 
-            $description = $set->valueResource()->displayDescription();
-        ?>
-            <div class="medium-12 cell article-entry">
-                <h3><?php echo $set->valueResource()->link($setTitle); ?></h3>
-                <p><?php echo $description; ?></p>
-            </div>
-        <?php endforeach; ?>
+        <?php if($sets): ?>
+            <?php foreach ($sets as $set):
+                $setTitle = $set->valueResource()->displayTitle(); 
+                $description = $set->valueResource()->displayDescription();
+            ?>
+                <div class="medium-12 cell article-entry">
+                    <h3><?php echo $set->valueResource()->link($setTitle); ?></h3>
+                    <p><?php echo $description; ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
         <?php foreach ($items as $item):
         $heading = $item->value($headingTerm, ['default' => $translate('[Untitled]')]);
         $subHeading = $item->value('dcterms:alternative');
