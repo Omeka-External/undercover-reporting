@@ -59,7 +59,12 @@ $sortHeadings = [
             $subjects = array_map(function ($value){return $value->asHtml();}, $subjects);
             $tagsList = '<li class="metadata">' . implode('</li><li class="metadata">', $subjects) . '</li>';
         }
-        $sets = $itemSet->value('dcterms:hasPart', ['all' => true]);
+        $resources = $itemSet->value('dcterms:hasPart', ['all' => true]);
+        if ($resources){
+            $resources = array_map(function($value){return $value->asHtml();}, $resources);
+            $resourceList = '<li class="metadata">' . implode('</li><li class="metadata">', $resources) . '</li>';
+        }
+        $sets = $itemSet->value('dcterms:isReferencedBy', ['all' => true]);
         $abstract = $itemSet->value('dcterms:abstract');
         ?>
         <?php if($description): ?>
@@ -81,6 +86,7 @@ $sortHeadings = [
             <h4>Links and Resources</h4>
             <ul>
             <?php echo $linkList; ?>
+            <?php echo $resourceList; ?>
             </ul>
             </div>
         <?php endif; ?>
