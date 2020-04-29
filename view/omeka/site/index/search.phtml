@@ -3,12 +3,12 @@
     <?php 
     $site = $this->layout()->site;
      $fulltextQuery = $this->params()->fromQuery('fulltext_search');
-        $query = [
+        $queryLimit = [
             'fulltext_search' => $fulltextQuery,
             'site_id' => $site->id(),
             'limit' => 10,
         ];
-        $itemSetsResponse = $this->api()->search('item_sets', $query);
+        $itemSetsResponse = $this->api()->search('item_sets', $queryLimit);
         $itemSets = $itemSetsResponse->getContent();
         $itemSetsTotal = $itemSetsResponse->getTotalResults();
      ?>
@@ -19,7 +19,15 @@
         <li><?php echo $itemSet->link($itemSet->title()); ?></li>
         <?php endforeach; ?>
     </ul>
-
+    <?php echo $this->hyperlink(
+        sprintf($this->translate('View all results (%s total)'), $itemSetsTotal),
+        $this->url(
+            'site/resource',
+            ['controller' => 'item-set', 'action' => 'browse'],
+            ['query' => ['fulltext_search' => $query]],
+            true
+        )
+    ); ?>
     <?php else: ?>
     <p><?php echo $this->translate('No reports found'); ?></p>
     <?php endif; ?>
