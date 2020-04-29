@@ -1,14 +1,16 @@
 <?php echo $this->pageTitle(sprintf($this->translate('Search results for “%s”'), $query)); ?>
 <div>
     <?php 
+    $site = $this->layout()->site;
      $fulltextQuery = $this->params()->fromQuery('fulltext_search');
         $query = [
             'fulltext_search' => $fulltextQuery,
-            'site_id' => $this->currentSite()->id(),
+            'site_id' => $site->id(),
             'limit' => 10,
         ];
-        $itemSetsResponse = $this->api()->search('site_pages', $query);
+        $itemSetsResponse = $this->api()->search('item_sets', $query);
         $itemSets = $itemSetsResponse->getContent();
+        $itemSetsTotal = $itemSetsResponse->getTotalResults();
      ?>
     <h2><?php echo $this->translate('Reports'); ?></h2>
     <?php if ($itemSets): ?>
@@ -17,15 +19,7 @@
         <li><?php echo $itemSet->link($itemSet->title()); ?></li>
         <?php endforeach; ?>
     </ul>
-    <?php echo $this->hyperlink(
-        sprintf($this->translate('View all results (%s total)'), $itemSetsTotal),
-        $this->url(
-            'site/item-set',
-            ['controller' => 'item-set', 'action' => 'browse'],
-            ['query' => ['fulltext_search' => $query]],
-            true
-        )
-    ); ?>
+
     <?php else: ?>
     <p><?php echo $this->translate('No reports found'); ?></p>
     <?php endif; ?>
