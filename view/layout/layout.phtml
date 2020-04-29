@@ -43,7 +43,9 @@ $userBar = $this->userBar();
                             <div id="search-container" class="medium-3 medium-offset-3 cell">
                                 <a href="<?php echo $site->url(); ?>/item/search">Advanced Search</a>
 
-                                <?php $searchValue = $this->escapeHtml($this->params()->fromQuery('fulltext_search', '')); ?>
+                                <?php 
+                                $translate = $this->plugin('translate');
+                                $searchValue = $this->escapeHtml($this->params()->fromQuery('fulltext_search', '')); ?>
                                 <form action="<?php echo $this->escapeHtml($this->url('site/resource', ['controller' => 'index','action' => 'search'], true)); ?>" id="search-form">
                                     <input type="text" name="fulltext_search" value="<?php echo $searchValue; ?>"
                                         placeholder="<?php echo $translate('Search'); ?>"
