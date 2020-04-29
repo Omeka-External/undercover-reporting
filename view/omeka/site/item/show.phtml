@@ -8,6 +8,7 @@ $itemMedia = $item->media();
 
 <div class="cell">
     <?php echo $this->pageTitle($item->displayTitle(), 2); ?>
+    <?php $subHeading = $item->value('dcterms:alternative'); ?>
     <?php if($subHeading): ?>
         <h4 class="subhead"><?php echo $subHeading; ?></h4>
     <?php endif; ?>
