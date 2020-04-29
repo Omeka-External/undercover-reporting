@@ -1,0 +1,53 @@
+<?php echo $this->pageTitle(sprintf($this->translate('Search results for “%s”'), $query)); ?>
+<div>
+    <?php 
+     $fulltextQuery = $this->params()->fromQuery('fulltext_search');
+        $query = [
+            'fulltext_search' => $fulltextQuery,
+            'site_id' => $this->currentSite()->id(),
+            'limit' => 10,
+        ];
+        $itemSetsResponse = $this->api()->search('site_pages', $query);
+        $itemSets = $itemSetsResponse->getContent();
+     ?>
+    <h2><?php echo $this->translate('Reports'); ?></h2>
+    <?php if ($itemSets): ?>
+    <ul>
+        <?php foreach ($itemSets as $itemSet): ?>
+        <li><?php echo $itemSet->link($itemSet->title()); ?></li>
+        <?php endforeach; ?>
+    </ul>
+    <?php echo $this->hyperlink(
+        sprintf($this->translate('View all results (%s total)'), $itemSetsTotal),
+        $this->url(
+            'site/item-set',
+            ['controller' => 'item-set', 'action' => 'browse'],
+            ['query' => ['fulltext_search' => $query]],
+            true
+        )
+    ); ?>
+    <?php else: ?>
+    <p><?php echo $this->translate('No reports found'); ?></p>
+    <?php endif; ?>
+</div>
+<div>
+    <h2><?php echo $this->translate('Primary Sources'); ?></h2>
+    <?php if ($items): ?>
+    <ul>
+        <?php foreach ($items as $item): ?>
+        <li><?php echo $item->link($item->displayTitle()); ?></li>
+        <?php endforeach; ?>
+    </ul>
+    <?php echo $this->hyperlink(
+        sprintf($this->translate('View all results (%s total)'), $itemsTotal),
+        $this->url(
+            'site/resource',
+            ['controller' => 'item', 'action' => 'browse'],
+            ['query' => ['fulltext_search' => $query]],
+            true
+        )
+    ); ?>
+    <?php else: ?>
+    <p><?php echo $this->translate('No primary sources found'); ?></p>
+    <?php endif; ?>
+</div>

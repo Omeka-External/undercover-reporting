@@ -42,9 +42,14 @@ $userBar = $this->userBar();
 
                             <div id="search-container" class="medium-3 medium-offset-3 cell">
                                 <a href="<?php echo $site->url(); ?>/item/search">Advanced Search</a>
-                                <?php $searchValue = $this->escapeHtml($this->params()->fromQuery('search', '')); ?>
-                                <form action="<?php echo $this->escapeHtml($this->url('site/resource', ['controller' => 'item','action' => 'browse'], true)); ?>" id="search-form" role="search">
-                                    <input type="text" name="search" value="<?php echo $searchValue; ?>" placeholder="<?php echo $this->translate('Search'); ?>" aria-label="search">
+
+                                <?php 
+                                
+                                $searchValue = $this->escapeHtml($this->params()->fromQuery('fulltext_search', '')); ?>
+                                <form action="<?php echo $this->escapeHtml($this->url('site/resource', ['controller' => 'index','action' => 'search'], true)); ?>" id="search-form">
+                                    <input type="text" name="fulltext_search" value="<?php echo $searchValue; ?>"
+                                        placeholder="<?php echo $translate('Search'); ?>"
+                                        aria-label="<?php echo $translate('Search'); ?>">
                                 </form>
                             </div>
                             <div class="medium-12 column">
