@@ -8,6 +8,9 @@ $itemMedia = $item->media();
 
 <div class="cell">
     <?php echo $this->pageTitle($item->displayTitle(), 2); ?>
+    <?php if($subHeading): ?>
+        <h4 class="subhead"><?php echo $subHeading; ?></h4>
+    <?php endif; ?>
 </div>
     <div class="medium-4 cell">
         <?php 
@@ -25,7 +28,7 @@ $itemMedia = $item->media();
         <?php endif; ?>
         <?php $itemSets = $item->itemSets(); ?>
         <?php if($itemSets): ?>
-        <p><span class="bold">Cluster: </span>
+        <p><span class="bold">Report: </span>
             <?php foreach($itemSets as $itemSet): ?>
                 <a href="<?php echo $escape($itemSet->url()); ?>"><?php echo $itemSet->displayTitle(); ?></a>
             <?php endforeach; ?>
@@ -65,7 +68,7 @@ $itemMedia = $item->media();
 
     <?php if($item->value('dcterms:rights')): ?>
     <div class="medium-12 cell">
-        <p><?php echo $item->value('dcterms:description'); ?></p>
+        <p><span class="bold">Description:</span><?php echo $item->value('dcterms:description'); ?></p>
         <p><span class="bold">Rights:</span> <?php echo $item->value('dcterms:rights'); ?></p>
     </div>
     <?php endif; ?>
