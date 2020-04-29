@@ -144,7 +144,8 @@ $sortHeadings = [
 
 <?php else: ?>
     <div class="medium-6 cell">
-        <?php echo $this->pageTitle($translate('Browse Articles'), 2); ?>
+        <?php echo $this->pageTitle($translate('Browse Primary Sources'), 2); ?>
+        <?php echo $this->searchFilters(); ?>
     </div>
     <div class="medium-3 medium-offset-3 cell">
         <?php echo $this->pagination(); ?>
