@@ -64,6 +64,11 @@ $sortHeadings = [
             $resources = array_map(function($value){return $value->asHtml();}, $resources);
             $resourceList = '<li class="metadata">' . implode('</li><li class="metadata">', $resources) . '</li>';
         }
+        $formats = $itemSet->value('dcterms:format', ['all' => true]);
+        if ($formats){
+            $formats = array_map(function($value){return $value->asHtml();}, $formats);
+            $formatList = implode(', ', $formats);
+        }
         $sets = $itemSet->value('dcterms:isReferencedBy', ['all' => true]);
         $abstract = $itemSet->value('dcterms:abstract');
         ?>
@@ -102,6 +107,13 @@ $sortHeadings = [
             <div class="metadata-group">
             <h4>Effects and Outcomes</h4>
             <p><?php echo $abstract; ?></p>
+            </div>
+        <?php endif; ?>
+        <?php if($formatList): ?>
+            <div class="metadat-group">
+            <h4>Media History</h4>
+            <p>The reporting was intended for these media types:
+            <?php echo $formatList; ?></p>
             </div>
         <?php endif; ?>
     </div>
