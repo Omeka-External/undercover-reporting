@@ -31,9 +31,7 @@ $itemMedia = $item->media();
         <?php if($itemSets): ?>
         <p><span class="bold">Report: </span>
             <?php foreach($itemSets as $itemSet): ?>
-                <a href="<?php echo $escape($itemSet->url()); ?>"><?php echo $itemSet->displayTitle(); ?></a>
-                <!-- if dates get fixed remove the line above and uncomment the one below -->
-                <!-- <a href="<?php echo $itemSet->url(); ?>?sort_by=dcterms:date&sort_order=asc"><?php echo $itemSet->displayTitle(); ?></a> -->
+                <a href="<?php echo $itemSet->url(); ?>?sort_by=numeric:timestamp&sort_order=asc"><?php echo $itemSet->displayTitle(); ?></a>
             <?php endforeach; ?>
         </p>
         <?php endif; ?>
