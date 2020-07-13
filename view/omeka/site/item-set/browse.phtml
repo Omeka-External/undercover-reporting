@@ -21,17 +21,16 @@ $this->htmlElement('body')->appendAttribute('class', 'item-set resource browse')
     <div class="grid-x grid-padding-x cluster-list-item">
         <div class="medium-3 cell">            
             <?php echo $itemSet->linkRaw($this->thumbnail($itemSet, 'medium')); ?>
-            <!-- if dates get fixed, remove the line above and uncomment the line below -->
 
             <?php 
                 $itemSetUrl = $itemSet->url();
                 $itemSetThumb = $this->thumbnail($itemSet, 'medium');
             ?>
-            <!-- <a href="<?php echo $itemSetUrl; ?>?sort_by=dcterms:date&sort_order=asc"><?php echo $itemSetThumb; ?></a> -->
+            <a href="<?php echo $itemSetUrl; ?>?sort_by=numeric:timestamp:7&sort_order=asc"><?php echo $itemSetThumb; ?></a>
 
         </div>
         <div class="medium-9 cell">
-            <h4><a href="<?php echo $itemSetUrl; ?>?sort_by=numeric:timestamp&sort_order=asc"><?php echo $itemSet->displayTitle(); ?></a></h4>
+            <h4><a href="<?php echo $itemSetUrl; ?>?sort_by=numeric:timestamp:7&sort_order=asc"><?php echo $itemSet->displayTitle(); ?></a></h4>
             <?php if ($description = $itemSet->displayDescription()): ?>
             <div class="description"><?php echo $description; ?></div>
             <?php endif; ?>

@@ -31,7 +31,7 @@ $itemMedia = $item->media();
         <?php if($itemSets): ?>
         <p><span class="bold">Report: </span>
             <?php foreach($itemSets as $itemSet): ?>
-                <a href="<?php echo $itemSet->url(); ?>?sort_by=numeric:timestamp&sort_order=asc"><?php echo $itemSet->displayTitle(); ?></a>
+                <a href="<?php echo $itemSet->url(); ?>?sort_by=numeric:timestamp:7&sort_order=asc"><?php echo $itemSet->displayTitle(); ?></a>
             <?php endforeach; ?>
         </p>
         <?php endif; ?>
