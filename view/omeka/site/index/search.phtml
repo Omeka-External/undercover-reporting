@@ -16,7 +16,7 @@
     <?php if ($itemSets): ?>
     <ul>
         <?php foreach ($itemSets as $itemSet): ?>
-        <li><?php echo $itemSet->link($itemSet->title()); ?></li>
+        <li><a href="<?php echo $itemSetUrl; ?>?sort_by=numeric:timestamp:7&sort_order=asc"><?php echo $itemSet->displayTitle(); ?></a></li>
         <?php endforeach; ?>
     </ul>
     <?php echo $this->hyperlink(
